@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{%  block assistant %}
+<h1 style="color:red">{{error}}</h1>
+   <form method="post"
+    action="/submit">
+      <div class="row">
+        <div class="col">
+            <select id="better" name="better" class="form-select" aria-label="Пример выбора по умолчанию">
+                <option value="-1" selected>Из предложенного списка выберите то, что хотите улучшить</option>
+              {%for ind, p in priems%}
+              <option value= "{{ ind }}">{{p}}</option>
+              {%endfor%}
+            </select>
+        </div>
+        <div class="col">
+            <select id="worse" name="worse" class="form-select" aria-label="Пример выбора по умолчанию">
+                <option value="-1" selected>А так же выберите то, что в таком случае ухудшается</option>
+              {%for i, pr in priems %}
+              <option value= "{{ i }}">{{pr}}</option>
+              {%endfor%}
+            </select>
+        </div>
+      </div>
+        <br>
+        <label>
+            Напишите полный текст вашей задачи (полностью без знаков препинания, через пробел каждое слово):
+        </label>
+        <input type = "text"  class="form-control" placeholder="Нужно убрать вазу из комнаты чтобы она не портила интерьер" name="description" required>
+        <br>
+        <label>
+            Введите изменение (задачу):
+        </label>
+        <input type = "text" style="width:800px" class="form-control" placeholder="Уничтожить вазу" name="task"required>
+    <div class="invalid-feedback">
+      Укажите задачу.
+    </div><br>
+        <label>
+            Какова ваша цел-(ь/и):
+        </label>
+        <input type = "text" style="width:300px" class="form-control" placeholder="Убрать вазу" name="aims"required>
+        <br>
+        <label>
+            Введите сценари-(и/й) задачи:
+        </label>
+        <input type = "text"  class="form-control" placeholder="Разбить вазу" name="scenarium"required>
+        <br>
+        <label>
+            Введите рол-(ь/и) через запятую:
+        </label>
+        <input type = "text" style="width:500px" class="form-control" placeholder="Уничтожитель" name="roles"required>
+        <br>
+        <br>
+        <input type="submit" class="btn btn-primary">
+
+    </form>
+
+{% endblock %}

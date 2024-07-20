@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{%  block assistant %}
+<h1 style="color:red">{{error}}</h1>
+<form method="post" action="/answer">
+
+        {% for isp in isps %}
+    <label>
+        Назовите свойства исполнителя {{ isp }}:
+        <input type = "text"  style="width:650px" class="form-control" placeholder="твёрдый" name={{isp}}>
+        <br>
+        {%endfor%}
+    </label>
+    <br>
+    <label>
+        Основные свойства {{ system }} в задаче:
+    </label>
+    <input type = "text" style="width:650px" class="form-control" placeholder="гранитная" name="system_feat">
+    <br>
+    <input class="btn btn-primary" type="submit">
+    </form>
+{% endblock %}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Answer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<!--создание синей штуки с заголовком-->
+<div class="container-fluid p-5 bg-primary text-white text-center">
+  <h1>Рекомендации по решению задачи от ТРИЗ-ассистента</h1>
+</div>
+
+<hr>
+
+<!--создание таблицы с подходящими приёмами-->
+<table class="table table-primary table-hover">
+      <thead>
+      <tr>
+          <th scope="col"> </th>
+          <th scope="col"><h3>Ваше решение по таблице устранения технических неполадок</h3></th>
+      </tr>
+      </thead>
+      <tbody>
+          {%for idx, i in question%}
+            <tr>
+                <th scope="row">{{idx + 1}}</th>
+                <td>{{i}}</td>
+            </tr>
+          {%endfor%}
+      </tbody>
+</table>
+
+<hr>
+
+<!--создание синей штуки с заголовком-->
+<div class="container-fluid p-5 bg-primary text-white text-center">
+  <h3>Сценарный анализ</h3>
+</div>
+
+<hr>
+
+<!--создание графа-->
+<canvas id="myCanvas" width="1500" height="510"></canvas>
+
+<script>
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+
+ctx.strokeStyle = "blue";
+ctx.strokeRect(150 + 300, 100, 200, 150);
+
+ctx.font = "20px Arial";
+ctx.fillStyle = "purple";
+
+{% if system|length >=8 %}
+ctx.textBaseline = "{{ system[:8] }}...";
+ctx.fillText("{{ system[:8] }}...", 200 + 300, 248);
+{% else %}
+ctx.textBaseline = "{{ system }}";
+ctx.fillText("{{ system }}", 200 + 300, 248);
+{% endif %}
+
+ctx.textBaseline = "Система";
+ctx.fillText("Система", 200 + 300, 180);
+
+
+ctx.strokeStyle = "blue";
+ctx.strokeRect(500 + 300, 10, 200, 150);
+
+ctx.font = "20px Arial";
+ctx.fillStyle = "purple";
+
+{% for i, p in features %}
+{% if i <=0 %}
+{% if p|length <=8 %}
+ctx.textBaseline = "{{ p }}";
+ctx.fillText("{{ p }}", 550 + 300, 158);
+{% else %}
+ctx.textBaseline = "{{ p[:8]}}...";
+ctx.fillText("{{ p[:8]}}...", 550 + 300, 158);
+{% endif %}
+{% endif %}
+{% endfor %}
+
+ctx.textBaseline = "Свойства";
+ctx.fillText("Свойства", 550 + 300, 90);
+
+
+ctx.strokeStyle = "blue";
+ctx.strokeRect(860 + 300, 100, 200, 150);
+
+ctx.font = "20px Arial";
+ctx.fillStyle = "purple";
+
+{% if task|length >=8 %}
+ctx.textBaseline = "{{ task[:8] }}...";
+ctx.fillText("{{ task[:8] }}...", 910 + 300, 248);
+{% else %}
+ctx.textBaseline = "{{ task }}";
+ctx.fillText("{{ task }}", 910 + 300, 248);
+{% endif %}
+
+ctx.textBaseline = "Изменение";
+ctx.fillText("Изменение", 910 + 300, 180);
+
+
+ctx.strokeStyle = "blue";
+ctx.strokeRect(700 + 300, 350, 200, 150);
+
+ctx.font = "20px Arial";
+ctx.fillStyle = "purple";
+
+{% for i, sc in scenarei %}
+{% if i <=1 %}
+{% if sc|length <=8 %}
+ctx.textBaseline = "{{ sc }}";
+ctx.fillText("{{ sc }}", 750 + 300, 498);
+{% else %}
+ctx.textBaseline = "{{ sc[:8]}}...";
+ctx.fillText("{{ sc[:8]}}...", 750 + 300, 498);
+{% endif %}
+{% endif %}
+{% endfor %}
+
+ctx.textBaseline = "Сценарий";
+ctx.fillText("Сценарий", 750 + 300, 430);
+
+
+ctx.strokeStyle = "blue";
+ctx.strokeRect(300 + 300, 350, 200, 150);
+
+ctx.font = "20px Arial";
+ctx.fillStyle = "purple";
+
+{% for i, rol in roles %}
+{% if i <=1 %}
+{% if rol|length <=8 %}
+ctx.textBaseline = "{{ rol }}";
+ctx.fillText("{{ rol }}", 350 + 300, 498-{{ i*20 }});
+{% else %}
+ctx.textBaseline = "{{ rol[:8]}}...";
+ctx.fillText("{{ rol[:8]}}...", 350 + 300, 498-{{ i*20 }});
+{% endif %}
+{% endif %}
+{% endfor %}
+
+ctx.textBaseline = "Роль";
+ctx.fillText("Роль", 375 + 300, 430);
+
+
+ctx.beginPath();
+ctx.moveTo(500 + 300, 425);
+ctx.lineTo(700 + 300, 425);
+ctx.stroke();
+
+ctx.textBaseline = "играет";
+ctx.fillText("играет", 565 + 300, 425);
+
+
+ctx.beginPath();
+ctx.moveTo(350 + 300, 125);
+ctx.lineTo(500 + 300, 125);
+ctx.stroke();
+
+ctx.textBaseline = "обладает";
+ctx.fillText("обладает", 380 + 300, 125);
+
+
+ctx.beginPath();
+ctx.moveTo(700 + 300, 125);
+ctx.lineTo(860 + 300, 125);
+ctx.stroke();
+
+ctx.textBaseline = "подвергается";
+ctx.fillText("подвергается", 720 + 300, 125);
+
+
+ctx.beginPath();
+ctx.moveTo(350 + 300, 210);
+ctx.lineTo(860 + 300, 210);
+ctx.stroke();
+
+ctx.textBaseline = "подвергается";
+ctx.fillText("подвергается", 520 + 300, 210);
+
+
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.moveTo(325 + 300,250);
+ctx.lineTo(325 + 300,350);
+ctx.stroke();
+ctx.closePath();
+
+ctx.textAlign = "исполняет";
+ctx.fillText("исполняет", 226 + 300, 300);
+
+
+ctx.lineWidth = 2;
+ctx.beginPath();
+ctx.moveTo(880 + 300,250);
+ctx.lineTo(880 + 300,350);
+ctx.stroke();
+ctx.closePath();
+
+ctx.textAlign = "выполняется через";
+ctx.fillText("выполняется через", 882 + 300, 300);
+</script>
+
+<hr>
+
+<!--создание синей штуки с заголовком-->
+<div class="container-fluid p-5 bg-primary text-white text-center">
+  <p>Сайт сделала мастерская №6 ЛШЮП 2024.</p>
+</div>
+</body>
+</html>

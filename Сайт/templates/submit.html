@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{%  block assistant %}
+<h1 style="color:red">{{error}}</h1>
+<form method="post", action="/submit2">
+
+
+        <label>Выберите то, что является главным объектом.</label>
+    <br>
+        <select id="system_end" name="system_end" class="form-select"  style="width:650px" aria-label="пример множественного выбора">
+
+            {% for sys in spisok %}
+            <option value="{{sys}}">{{sys}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        {% for role in roles %}
+    <label>
+        Назовите исполнителей на роль {{ role }}:</label>
+        <input type = "text" style="width:650px" class="form-control" placeholder="молоток, микроскоп" name={{role}}>
+        <br>
+        {%endfor%}
+    <br>
+
+
+    <input type="submit" class="btn btn-primary">
+
+    </form>
+{% endblock %}
