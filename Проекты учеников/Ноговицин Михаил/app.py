@@ -1,6 +1,6 @@
 from telebot import TeleBot, types
 
-bot  = TeleBot("7412069843:AAE84qnr3WCvlqtu8w5TD1CFRj1DRLAUv4Y")
+bot  = TeleBot("<TOKEN>")
 
 messages = {}
 
